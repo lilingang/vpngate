@@ -13,7 +13,7 @@ pip install html5lib
 class Vpngate(object):
 
     def __init__(self, host):
-        self.protocol = "http://"
+        self.protocol = "https://"
         self.host = host
 
     def download_config(self,path):
@@ -30,11 +30,12 @@ class Vpngate(object):
 
 
     def __http_get(self,url):
-    	request = urllib.request.Request(url)
-    	request.add_header('User-Agent', 'Mozilla/5.0')
-    	request.add_header('Origin', 'https://www.baidu.com')
-    	response = urllib.request.urlopen(request)
-    	return response
+        print(url)
+       	request = urllib.request.Request(url)
+        request.add_header('User-Agent', 'Mozilla/5.0')
+        request.add_header('Origin', 'https://www.baidu.com')
+        response = urllib.request.urlopen(request)
+        return response
 
 
     def __parse_detail_url(self,html):
