@@ -20,13 +20,16 @@ class Vpngate(object):
     	home_url = self.protocol + self.host + "/cn/"
     	detail_urls = self.__parse_detail_url(self.__http_get(home_url).read())
     	for detail_url in detail_urls:
-    		down_urls = self.__parse_down_url(self.__http_get(self.protocol+detail_url))
-    		for down_url in down_urls:
-    			file_url = self.protocol + down_url
-    			file_name = file_url.split('/')[-1]
-    			if not os.path.exists(path):
-    				os.makedirs(path)
-    			urllib.request.urlretrieve(file_url, filename=path+"/"+file_name)
+            try:
+    		    down_urls = self.__parse_down_url(self.__http_get(self.protocol+detail_url))
+    		    for down_url in down_urls:
+    			    file_url = self.protocol + down_url
+    			    file_name = file_url.split('/')[-1]
+    			    if not os.path.exists(path):
+    				    os.makedirs(path)
+    			    urllib.request.urlretrieve(file_url, filename=path+"/"+file_name)
+            except:
+                print("下载详情页异常")
 
 
     def __http_get(self,url):
